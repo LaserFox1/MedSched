@@ -2,7 +2,6 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import Menu from './app/Menu';
 import { NavigationContainer } from '@react-navigation/native';
-import firebase from "firebase";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBPBiT_zEwB85zG1xODwDPjW0ZXp9DUMQs",
