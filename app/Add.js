@@ -61,6 +61,9 @@ function Add(props) {
         
         </View>
       </View>
+      <View>
+        <Button title="Add" />
+      </View>
       <StatusBar style="auto" />
     </View>
   );
