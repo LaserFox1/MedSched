@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Calendar } from "react-native-calendars";
-import ProfileLine from "./ProfileLine";
+import ProfileLine from "./ProfileLine1";
 
 function CalendarScreen(props) {
   const [state, setState] = useState("Select a day to see more information!");

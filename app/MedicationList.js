@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
 import { StyleSheet, Text, View,  FlatList, RefreshControl, Alert } from "react-native";
 import Swipeout from "react-native-swipeout";
-import ProfileLine from "./ProfileLine";
+import ProfileLine from "./ProfileLine3";
 
 var data = [
   {

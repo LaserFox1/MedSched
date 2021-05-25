@@ -7,8 +7,8 @@ function ProfileLine(props) {
     <View style={styles.userContainer}>
       <Text style={styles.username}>Username</Text>
       <TouchableHighlight
-        activeOpacity={0.8}
-        underlayColor="#a4ffdd"
+        activeOpacity={0.6}
+        underlayColor="#bfefff"
         style={styles.iconUser}
         onPress={() => console.log("User")}
       >
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   userContainer: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    backgroundColor: "#BFEFFF",
+    backgroundColor: "#bfefff",
     marginTop: 40,
     paddingVertical: 20,
     paddingHorizontal: 15,

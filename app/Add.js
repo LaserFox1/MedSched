@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Platform } from "react-native";
 import { SearchBar } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import ProfileLine from "./ProfileLine";
+import ProfileLine from "./ProfileLine2";
 import WeekdayPicker from "./WeekdayPicker";
 import TimeList from "./TimeList";
 
