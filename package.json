@@ -33,5 +33,18 @@
   "devDependencies": {
     "@babel/core": "^7.9.0"
   },
-  "private": true
+  "private": true,
+  "name": "medsched",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaserFox1/MedSched.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LaserFox1/MedSched/issues"
+  },
+  "homepage": "https://github.com/LaserFox1/MedSched#readme",
+  "description": ""
 }
