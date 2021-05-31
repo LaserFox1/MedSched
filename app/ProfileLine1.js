@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
 
-function ProfileLine(props) {
+function ProfileLine() {
+const navigation = useNavigation();
   return (
     <View style={styles.userContainer}>
       <Text style={styles.username}>Username</Text>
@@ -10,7 +12,7 @@ function ProfileLine(props) {
         activeOpacity={0.6}
         underlayColor="#bfefff"
         style={styles.iconUser}
-        onPress={() => console.log("User")}
+        onPress={() => navigation.navigate('UserPage')}
       >
         <View>
           <FontAwesome5 name="user-circle" size={45} color="black" />
