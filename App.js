@@ -3,20 +3,30 @@ import React from 'react';
 import Menu from './app/Menu';
 import Welcome from './app/WelcomePage';
 import UserPage from './app/UserPage';
+import Login from './app/LoginPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
-export default function App() {
-  return (
-    <NavigationContainer>
-         <Stack.Navigator initialRouteName="Menu">
-            <Stack.Screen name="Menu" component={Menu} options={{headerShown: false}}/>
-            <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
-            <Stack.Screen name="UserPage" component={UserPage} options={{headerShown: false}}/>
-        </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+const App = () => {
+  useEffect(() => {
+    // initialize the Google SDK
+    GoogleSignIn.configure({
+      webClientId: '992717464334-qiljmtjb02l7g8ug08le4gg9shmjqg8g.apps.googleusercontent.com',
+    });
+  }, []);
+    return (
+        <NavigationContainer>
+             <Stack.Navigator initialRouteName="Menu">
+                <Stack.Screen name="Menu" component={Menu} options={{headerShown: false}}/>
+                <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
+                <Stack.Screen name="UserPage" component={UserPage} options={{headerShown: false}}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+      );
+};
+
+
+export default App();
 

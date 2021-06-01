@@ -1,16 +1,18 @@
 import React from "react";
+import SocialButton from './components/SocialButton';
 import { Button } from 'react-native-elements';
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { BoxShadow } from "react-native-shadow";
-import {
-  useFonts,
+import { AuthContext } from "./auth/AuthProvider.js";
+import { useFonts,
   Pattaya_400Regular
 } from "@expo-google-fonts/dev";
-
 function WelcomePage(props) {
   let [fontsLoaded] = useFonts({
     Pattaya_400Regular
   });
+
+const {login, googleLogin} = useContext(AuthContext);
 
   const shadowOpt = {
     width: 150,
@@ -32,6 +34,13 @@ function WelcomePage(props) {
     <View style={styles.container}>
       <Text style={{fontSize: 40}}>Welcome to</Text>
       <Text style={{fontSize: 40, marginBottom: 50, fontFamily: "Pattaya_400Regular"}}>MedSched</Text>
+      <SocialButton
+              buttonTitle="Sign In with Google"
+              btnType="google"
+              color="#de4d41"
+              backgroundColor="#f5e7ea"
+              onPress={() => {googleLogin()}}
+            />
       <BoxShadow setting={shadowOpt}>
         <TouchableHighlight
         activeOpacity={0.6}

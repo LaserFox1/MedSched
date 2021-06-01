@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "992717464334-j9mcs0jaccfu1l24erka6t2jd29rkgsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dteam.medsched",
+            "certificate_hash": "cf8db52ca0e21975c5f694677ab0f6ea0e62f7a1"
+          }
+        },
+        {
           "client_id": "992717464334-qiljmtjb02l7g8ug08le4gg9shmjqg8g.apps.googleusercontent.com",
           "client_type": 3
         }
