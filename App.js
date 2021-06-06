@@ -9,13 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-const App = () => {
-  useEffect(() => {
-    // initialize the Google SDK
-    GoogleSignIn.configure({
-      webClientId: '992717464334-qiljmtjb02l7g8ug08le4gg9shmjqg8g.apps.googleusercontent.com',
-    });
-  }, []);
+export default App = () => {
     return (
         <NavigationContainer>
              <Stack.Navigator initialRouteName="Menu">
@@ -26,7 +20,4 @@ const App = () => {
         </NavigationContainer>
       );
 };
-
-
-export default App();
 
