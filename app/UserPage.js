@@ -1,12 +1,46 @@
 import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { BoxShadow } from "react-native-shadow";
+import {
+  useFonts,
+  Pattaya_400Regular
+} from "@expo-google-fonts/dev";
 
 function UserPage(props) {
+let [fontsLoaded] = useFonts({
+    Pattaya_400Regular
+  });
+
 const navigation = useNavigation();
+
+const shadowOpt = {
+    width: 150,
+    height: 50,
+    color: "#000",
+    border: 2,
+    radius: 10,
+    opacity: 0.2,
+    x: 0,
+    y: 3,
+    style: { marginVertical: 5 }
+  };
+
+if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View>
-      <Text>This is the user page!</Text>
+    <View style={styles.container}>
+    <View style={styles.titleContainer}>
+      <Text style={styles.title}>MedSched</Text>
+     </View>
+     <View style={styles.dataContainer}>
+      <Text style={styles.username}>Username</Text>
+      <Text style={styles.email}>E-Mail Address</Text>
+     </View>
+      <View style={styles.logout}>
+      <BoxShadow setting={shadowOpt}>
       <TouchableHighlight
               activeOpacity={0.6}
               underlayColor="#edfbff"
@@ -32,8 +66,64 @@ const navigation = useNavigation();
             >
               <Text style={{fontWeight: "bold", width: 150, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 20}}>Logout</Text>
             </TouchableHighlight>
+            </BoxShadow>
+            </View>
+            <View style={styles.logout}>
+                  <BoxShadow setting={shadowOpt}>
+                  <TouchableHighlight
+                          activeOpacity={0.6}
+                          underlayColor="#edfbff"
+                          onPress={() =>
+                          navigation.navigate("NotificationTest")
+                          }
+                          style={{
+                            width: 150,
+                            height: 50,
+                            backgroundColor: "#fff",
+                            borderRadius: 10,
+                          }}
+                        >
+                          <Text style={{fontWeight: "bold", width: 150, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 20}}>NotificationTest</Text>
+                        </TouchableHighlight>
+                        </BoxShadow>
+                        </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  titleContainer: {
+  flex: 2,
+      justifyContent: 'center',
+      alignItems: 'center',
+  },
+  dataContainer: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+},
+title: {
+    fontSize: 50,
+    fontFamily: "Pattaya_400Regular",
+},
+username: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 40,
+},
+email: {
+    fontSize: 30,
+    fontWeight: 'bold',
+},
+  logout: {
+    flex: 1,
+    justifyContent: 'flex-end',
+     alignItems: 'center',
+    marginBottom: 40,
+  },
+});
 
 export default UserPage;

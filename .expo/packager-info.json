@@ -1,10 +1,1 @@
-{
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19000,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://bk-uwy.anonymous.medsched.exp.direct",
-  "packagerNgrokUrl": "https://packager.bk-uwy.anonymous.medsched.exp.direct",
-  "ngrokPid": 5092,
-  "webpackServerPort": null
-}
+{}
