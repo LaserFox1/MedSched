@@ -3,8 +3,8 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://ih-tzd.mxnjxnx.medsched.exp.direct",
+  "packagerNgrokUrl": "https://packager.ih-tzd.mxnjxnx.medsched.exp.direct",
+  "ngrokPid": 15252,
   "webpackServerPort": null
 }

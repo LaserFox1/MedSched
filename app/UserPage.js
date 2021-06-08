@@ -68,6 +68,25 @@ if (!fontsLoaded) {
             </TouchableHighlight>
             </BoxShadow>
             </View>
+            <View style={styles.logout}>
+                  <BoxShadow setting={shadowOpt}>
+                  <TouchableHighlight
+                          activeOpacity={0.6}
+                          underlayColor="#edfbff"
+                          onPress={() =>
+                          navigation.navigate("NotificationTest")
+                          }
+                          style={{
+                            width: 150,
+                            height: 50,
+                            backgroundColor: "#fff",
+                            borderRadius: 10,
+                          }}
+                        >
+                          <Text style={{fontWeight: "bold", width: 150, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 20}}>NotificationTest</Text>
+                        </TouchableHighlight>
+                        </BoxShadow>
+                        </View>
     </View>
   );
 }
