@@ -1,9 +1,9 @@
 {
-  "expoServerNgrokUrl": "https://bb-bt9.anonymous.medsched.exp.direct",
-  "packagerNgrokUrl": "https://packager.bb-bt9.anonymous.medsched.exp.direct",
-  "ngrokPid": 5232,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "expoServerPort": null,
-  "packagerPort": 19000,
+  "packagerPort": null,
   "packagerPid": null,
   "webpackServerPort": null,
   "devToolsPort": 19002

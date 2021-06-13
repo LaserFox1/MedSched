@@ -54,7 +54,7 @@ function Add(props) {
     };
 
     const pushMed = () => {
-    console.log("Started");
+    console.log("Starting the writing process for "+cUser+"/"+med);
       db.collection("users").doc(cUser).collection("storedMedication").doc(med).set({
       days: getDays(),
       times: timesList
@@ -67,8 +67,10 @@ function Add(props) {
         setTimes("");
     };
 
-    const pushTime = () => {
-        setTimes(timesList + cTime+",");
+    const pushTime = () => {7
+        var ifComma = "";
+        if(timesList != "") ifComma = ",";
+        setTimes(timesList + ifComma + cTime);
         console.log(timesList);
     }
 
@@ -81,6 +83,7 @@ function Add(props) {
         if(isFri) output = output + "5,";
         if(isSat) output = output + "6,";
         if(isSun) output = output + "0,";
+        output = output.substring(0, output.length - 1);
         return output;
     }
 

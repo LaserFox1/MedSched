@@ -29,7 +29,6 @@ export default App = () => {
 
     updateTime = () => {
         setCurrentTime(new Date().toLocaleTimeString());
-        console.log(currentTime);
         if(currentTime == "13:00:00"){
           (async () => {
               await sendPushNotification(expoPushToken);
