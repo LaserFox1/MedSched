@@ -1,1 +1,10 @@
-{}
+{
+  "expoServerNgrokUrl": "https://bb-bt9.anonymous.medsched.exp.direct",
+  "packagerNgrokUrl": "https://packager.bb-bt9.anonymous.medsched.exp.direct",
+  "ngrokPid": 5232,
+  "expoServerPort": null,
+  "packagerPort": 19000,
+  "packagerPid": null,
+  "webpackServerPort": null,
+  "devToolsPort": 19002
+}
