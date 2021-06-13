@@ -5,6 +5,7 @@ import Menu from './app/Menu';
 import Welcome from './app/WelcomePage';
 import UserPage from './app/UserPage';
 import Login from './app/LoginPage';
+import Register from './app/RegisterPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
@@ -92,6 +93,7 @@ export default App = () => {
                 <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
                 <Stack.Screen name="UserPage" component={UserPage} options={{headerShown: false}}/>
                 <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+                <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
       );
