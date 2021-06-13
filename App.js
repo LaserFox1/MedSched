@@ -91,6 +91,7 @@ export default App = () => {
                 <Stack.Screen name="Menu" component={Menu} options={{headerShown: false}}/>
                 <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
                 <Stack.Screen name="UserPage" component={UserPage} options={{headerShown: false}}/>
+                <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
       );
