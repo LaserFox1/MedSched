@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
+import firebase from "firebase";
 
 const Stack = createStackNavigator();
 
@@ -27,14 +28,39 @@ export default App = () => {
     const responseListener = useRef();
     const [currentTime, setCurrentTime] = useState();
 
+    if(!firebase.apps.length){
+    firebase.initializeApp({
+      apiKey: "AIzaSyBPBiT_zEwB85zG1xODwDPjW0ZXp9DUMQs",
+      authDomain: "medsched-29619.firebaseapp.com",
+      projectId: "medsched-29619"
+    });
+    }else firebase.app();
+
+    var db = firebase.firestore();
+
     updateTime = () => {
         setCurrentTime(new Date().toLocaleTimeString());
-        if(currentTime == "13:00:00"){
-          (async () => {
-              await sendPushNotification(expoPushToken);
-          })();
-          console.log("Notification sent!");
-        }
+        db.collection("users").doc("Paul").collection("storedMedication").doc("Aspirin").get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data().days);
+                var dayArr = doc.data().days.split(',');
+                var timeArr = doc.data().times.split(',');
+                for (var d of dayArr){
+                    for(var t of timeArr){
+                        t += ":00"
+                        if(d == new Date().getDay() && t == currentTime){
+                            (async () => {
+                                await sendPushNotification(expoPushToken);
+                            })();
+                        }
+                    }
+                }
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
     }
 
      useEffect(() => {
@@ -49,7 +75,7 @@ export default App = () => {
         });
 
         const interval = setInterval(() => {
-          updateTime();
+          //updateTime();
         }, 1000);
 
         return () => {
