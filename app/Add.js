@@ -74,13 +74,13 @@ function Add(props) {
 
     const getDays = () => {
         var output = "";
-        if(isMon) output = output + "0,";
-        if(isTue) output = output + "1,";
-        if(isWed) output = output + "2,";
-        if(isThu) output = output + "3,";
-        if(isFri) output = output + "4,";
-        if(isSat) output = output + "5,";
-        if(isSun) output = output + "6,";
+        if(isMon) output = output + "1,";
+        if(isTue) output = output + "2,";
+        if(isWed) output = output + "3,";
+        if(isThu) output = output + "4,";
+        if(isFri) output = output + "5,";
+        if(isSat) output = output + "6,";
+        if(isSun) output = output + "0,";
         return output;
     }
 
