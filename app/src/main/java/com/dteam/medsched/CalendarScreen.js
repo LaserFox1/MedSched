@@ -12,7 +12,7 @@ function CalendarScreen(props) {
       <View>
         <Calendar
           onDayPress={(day) => {
-            setState(day.dateString);
+            setState(new Date(day.dateString).getDay());
             console.log("selected day", day);
           }}
           onMonthChange={(month) => {

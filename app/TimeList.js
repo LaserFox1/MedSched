@@ -6,26 +6,8 @@ var data = [
   {
     id: 1,
     name: "Aspirin",
-    date: "Mo, Mi, Fr",
-    time: "08:00, 18:00",
-  },
-  {
-    id: 2,
-    name: "Medication 2",
-    date: "Di, Do, Sa, So",
-    time: "13:00",
-  },
-  {
-    id: 3,
-    name: "Medication 3",
-    date: "So",
-    time: "16:00",
-  },
-  {
-    id: 4,
-    name: "Medication 4",
-    date: "Di, Fr",
-    time: "7:00, 12:30, 18:00",
+    date: "Thu",
+    time: "12:00",
   },
 ];
 

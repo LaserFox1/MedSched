@@ -7,7 +7,7 @@ function ProfileLine() {
 const navigation = useNavigation();
   return (
     <View style={styles.userContainer}>
-      <Text style={styles.username}>Username</Text>
+      <Text style={styles.username}>Dominic</Text>
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#998bb9"
