@@ -53,7 +53,7 @@ const navigation = useNavigation();
           <TouchableHighlight
                   activeOpacity={0.6}
                   underlayColor="#edfbff"
-                  onPress={() => signInAsync()}
+                  onPress={() => navigation.navigate("Register")}
                   style={{
                     width: 150,
                     height: 50,
