@@ -48,6 +48,7 @@ export default function App() {
           db.collection("users").doc(user.uid).set({
           userEmail: email,
           });
+          navigation.navigate("Menu");
           // ...
         })
         .catch((error) => {
@@ -90,7 +91,6 @@ const navigation = useNavigation();
                   underlayColor="#edfbff"
                   onPress={() => {
                         signUpWithEmailPassword(email, password);
-                        navigation.navigate("Menu");
 
                         }
                   }

@@ -58,6 +58,7 @@ export default function App() {
           .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
+            navigation.navigate("Menu")
             // ...
           })
           .catch((error) => {
@@ -100,7 +101,6 @@ const navigation = useNavigation();
                   underlayColor="#edfbff"
                   onPress={() => {
                     signInWithEmailAndPassword(email, password);
-                    navigation.navigate("Menu")
                   }
                   }
                   style={{

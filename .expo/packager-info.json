@@ -1,9 +1,9 @@
 {
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "expoServerPort": null,
-  "packagerPort": null,
+  "expoServerNgrokUrl": "https://rq-gpw.mxnjxnx.medsched.exp.direct",
+  "packagerNgrokUrl": "https://packager.rq-gpw.mxnjxnx.medsched.exp.direct",
+  "ngrokPid": 11856,
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
   "packagerPid": null,
   "webpackServerPort": null,
   "devToolsPort": 19002

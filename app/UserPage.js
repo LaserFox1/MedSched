@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableHighlight, View, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { BoxShadow } from "react-native-shadow";
@@ -27,6 +27,16 @@ const shadowOpt = {
     style: { marginVertical: 5 }
   };
 
+  const [cUser, setCUser] = useState("");
+
+  firebase.auth().onAuthStateChanged((firebaseUser) => {
+             if (firebaseUser) {
+             setCUser(firebaseUser.email);
+             } else {
+               console.log("Failed");
+             }
+     });
+
 if (!fontsLoaded) {
     return null;
   }
@@ -37,8 +47,7 @@ if (!fontsLoaded) {
       <Text style={styles.title}>MedSched</Text>
      </View>
      <View style={styles.dataContainer}>
-      <Text style={styles.username}>Dominic</Text>
-      <Text style={styles.email}>dteam@gmail.com</Text>
+      <Text style={styles.email}>{cUser}</Text>
      </View>
       <View style={styles.logout}>
       <BoxShadow setting={shadowOpt}>

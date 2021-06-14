@@ -86,7 +86,7 @@ export default App = () => {
         });
 
         const interval = setInterval(() => {
-          updateTime();
+          //updateTime();
         }, 1000);
 
         return () => {
