@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useNavigation } from '@react-navigation/native';
 import { BoxShadow } from "react-native-shadow";
 import React, { useState } from "react";
+import firebase from "firebase";
 import {
   StyleSheet,
   Text,
@@ -14,8 +15,18 @@ import {
 } from "react-native";
 
 export default function App() {
+const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+    if(!firebase.apps.length){
+    firebase.initializeApp({
+      apiKey: "AIzaSyBPBiT_zEwB85zG1xODwDPjW0ZXp9DUMQs",
+      authDomain: "medsched-29619.firebaseapp.com",
+      projectId: "medsched-29619"
+    });
+    }else firebase.app();
+    var db = firebase.firestore();
 
   const shadowOpt = {
         width: 150,
@@ -29,6 +40,27 @@ export default function App() {
         style: { marginVertical: 5 }
       };
 
+    function signUpWithEmailPassword() {
+      // [START auth_signup_password]
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed in
+          var user = userCredential.user;
+          const data = {
+                  "Name" : name,
+                  "Mail" : user.email,
+                  "password" : user.password
+              };
+          db.collection("users").doc(name).set(data);
+          // ...
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ..
+        });
+      // [END auth_signup_password]
+    }
 
 const navigation = useNavigation();
 
@@ -41,6 +73,7 @@ const navigation = useNavigation();
                 style={styles.TextInput}
                 placeholder="Name."
                 placeholderTextColor="#003f5c"
+                onChangeText={(name) => setName(name)}
               />
        </View>
       <StatusBar style="auto" />
@@ -67,7 +100,13 @@ const navigation = useNavigation();
       <TouchableHighlight
                   activeOpacity={0.6}
                   underlayColor="#edfbff"
-                  onPress={() => navigation.navigate("Menu")}
+                  onPress={() => {
+                        console.log(name + "," + email  + ", " + password)
+                        signUpWithEmailPassword(email, password);
+                        navigation.navigate("Menu");
+
+                        }
+                  }
                   style={{
                     width: 150,
                     height: 50,

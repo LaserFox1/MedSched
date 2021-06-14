@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useNavigation } from '@react-navigation/native';
 import { BoxShadow } from "react-native-shadow";
 import React, { useState } from "react";
+import firebase from "firebase";
 import {
   StyleSheet,
   Text,
@@ -17,6 +18,15 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  if(!firebase.apps.length){
+    firebase.initializeApp({
+      apiKey: "AIzaSyBPBiT_zEwB85zG1xODwDPjW0ZXp9DUMQs",
+      authDomain: "medsched-29619.firebaseapp.com",
+      projectId: "medsched-29619"
+    });
+    }else firebase.app();
+    var db = firebase.firestore();
+
   const shadowOpt = {
       width: 150,
       height: 50,
@@ -28,6 +38,33 @@ export default function App() {
       y: 3,
       style: { marginVertical: 5 }
     };
+    function authStateListener() {
+      // [START auth_state_listener]
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          var uid = user.uid;
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
+      // [END auth_state_listener]
+    }
+    function signInWithEmailAndPassword() {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            // ...
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          });
+      }
 
 const navigation = useNavigation();
 
@@ -61,7 +98,11 @@ const navigation = useNavigation();
       <TouchableHighlight
                   activeOpacity={0.6}
                   underlayColor="#edfbff"
-                  onPress={() => navigation.navigate("Menu")}
+                  onPress={() => {
+                    signInWithEmailAndPassword(email, password);
+                    navigation.navigate("Menu")
+                  }
+                  }
                   style={{
                     width: 150,
                     height: 50,

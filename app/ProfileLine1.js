@@ -1,13 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import firebase from "firebase";
 import { useNavigation } from '@react-navigation/native';
 
 function ProfileLine() {
-const navigation = useNavigation();
+    const navigation = useNavigation();
+
+    const user = firebase.auth().currentUser;
+    console.log(user);
+  // [END auth_state_listener]
   return (
     <View style={styles.userContainer}>
-      <Text style={styles.username}>Dominic</Text>
+      <Text style={styles.username}>{user.Mail}</Text>
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#bfefff"
