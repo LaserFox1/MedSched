@@ -15,7 +15,6 @@ import {
 } from "react-native";
 
 export default function App() {
-const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -46,12 +45,9 @@ const [name, setName] = useState("");
         .then((userCredential) => {
           // Signed in
           var user = userCredential.user;
-          const data = {
-                  "Name" : name,
-                  "Mail" : user.email,
-                  "password" : user.password
-              };
-          db.collection("users").doc(name).set(data);
+          db.collection("users").doc(user.uid).set({
+          userEmail: email,
+          });
           // ...
         })
         .catch((error) => {
@@ -68,14 +64,6 @@ const navigation = useNavigation();
     <View style={styles.container}>
 
 
-      <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Name."
-                placeholderTextColor="#003f5c"
-                onChangeText={(name) => setName(name)}
-              />
-       </View>
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
@@ -101,7 +89,6 @@ const navigation = useNavigation();
                   activeOpacity={0.6}
                   underlayColor="#edfbff"
                   onPress={() => {
-                        console.log(name + "," + email  + ", " + password)
                         signUpWithEmailPassword(email, password);
                         navigation.navigate("Menu");
 

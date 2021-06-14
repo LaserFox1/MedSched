@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { Text, View, Button, Platform, LogBox } from 'react-native';
 import Menu from './app/Menu';
 import Welcome from './app/WelcomePage';
 import UserPage from './app/UserPage';
@@ -11,6 +11,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import firebase from "firebase";
+LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 
