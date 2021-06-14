@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { BoxShadow } from "react-native-shadow";
+import firebase from "firebase";
 import {
   useFonts,
   Pattaya_400Regular
@@ -51,7 +52,11 @@ if (!fontsLoaded) {
                             [
                               {text: 'No'},
                               {text: 'Yes', onPress: () => {
-                                  navigation.navigate("Welcome");
+                                  firebase.auth().signOut().then(() =>{
+                                        navigation.navigate("Welcome");
+                                  }).catch((error) => {
+                                        console.log(error.getMessage());
+                                  });
                               }},
                             ],
                             {cancelable: true}
