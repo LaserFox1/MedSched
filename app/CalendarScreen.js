@@ -20,37 +20,38 @@ function CalendarScreen(props) {
 
   return (
     <View style={styles.container}>
-      <ProfileLine />
-      <View>
-        <Calendar
-          onDayPress={(day) => {
-            console.log("selected day", day);
-            var s = "";
-            db.collection("users").doc("Paul").collection("storedMedication").get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    console.log(doc.id, " => ", doc.data());
-                    var dayArr = doc.data().days.split(',');
-                    for (var d of dayArr){
-                        if(d == new Date(day.dateString).getDay()){
-                            s += `${doc.id}: ${doc.data().times}\n`
-                            setState(s);
+          <ProfileLine />
+          <View>
+            <Calendar
+              onDayPress={(day) => {
+                console.log("selected day", day);
+                var s = "";
+                setState(s);
+                db.collection("users").doc("Dominic").collection("storedMedication").get().then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.id, " => ", doc.data().toString);
+                        var dayArr = doc.data().days.split(',');
+                        for (var d of dayArr){
+                            if(d == new Date(day.dateString).getDay()){
+                                s += `${doc.id}: ${doc.data().times}\n`
+                                setState(s);
+                            }
                         }
-                    }
+                    });
                 });
-            });
-          }}
-          onMonthChange={(month) => {
-            console.log("month changed", month);
-          }}
-          disableAllTouchEventsForDisabledDays={true}
-          enableSwipeMonths={true}
-        />
-      </View>
-      <View>
-      <Text style={styles.text}>{state}</Text>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+              }}
+              onMonthChange={(month) => {
+                console.log("month changed", month);
+              }}
+              disableAllTouchEventsForDisabledDays={true}
+              enableSwipeMonths={true}
+            />
+          </View>
+          <View>
+          <Text style={styles.text}>{state}</Text>
+          </View>
+          <StatusBar style="auto" />
+        </View>
   );
 }
 

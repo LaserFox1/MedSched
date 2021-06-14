@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from '@react-navigation/native';
+import { BoxShadow } from "react-native-shadow";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -15,6 +16,18 @@ import {
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const shadowOpt = {
+      width: 150,
+      height: 50,
+      color: "#000",
+      border: 2,
+      radius: 10,
+      opacity: 0.2,
+      x: 0,
+      y: 3,
+      style: { marginVertical: 5 }
+    };
 
 const navigation = useNavigation();
 
@@ -44,7 +57,7 @@ const navigation = useNavigation();
       <TouchableOpacity >
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
-
+        <BoxShadow setting={shadowOpt}>
       <TouchableHighlight
                   activeOpacity={0.6}
                   underlayColor="#edfbff"
@@ -57,6 +70,7 @@ const navigation = useNavigation();
                   }}>
                   <Text style={{fontWeight: "bold", width: 150, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 20}}>Login</Text>
       </TouchableHighlight>
+      </BoxShadow>
     </View>
   );
 }
@@ -74,7 +88,7 @@ const styles = StyleSheet.create({
   },
 
   inputView: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: "#bfefff",
     borderRadius: 30,
     width: "70%",
     height: 45,

@@ -41,7 +41,14 @@ function Add(props) {
       const currentDate = selectedDate || date;
       setShow(Platform.OS === 'ios');
       setDate(currentDate);
-      setTime(currentDate.getHours() + ":" + currentDate.getMinutes());
+      var minutes;
+      if(currentDate.getMinutes().length > 1){
+        minutes = currentDate.getMinutes();
+      }
+      else{
+        minutes = "0" + currentDate.getMinutes();
+      }
+      setTime(currentDate.getHours() + ":" + minutes);
     };
 
     const showMode = (currentMode) => {
@@ -67,7 +74,7 @@ function Add(props) {
         setTimes("");
     };
 
-    const pushTime = () => {7
+    const pushTime = () => {
         var ifComma = "";
         if(timesList != "") ifComma = ",";
         setTimes(timesList + ifComma + cTime);
@@ -92,63 +99,64 @@ function Add(props) {
 
   return (
     <View style={styles.container}>
-      <ProfileLine />
-      <View>
-        <Text style={styles.headers}>Medication</Text>
-        <SearchBar
-          placeholder="Type Here..."
-          onChangeText={setSearchText}
-          value={searchText}
-          platform="android"
-          showLoading={true}
-        />
-      </View>
-      <View>
-       <Text style={styles.headers}>Days</Text>
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Mon</Text>
-        <CheckBox value={isMon} onValueChange={setMon} style={styles.checkbox}/>
-        <Text>Tue</Text>
-        <CheckBox value={isTue} onValueChange={setTue} style={styles.checkbox}/>
-        <Text>Wed</Text>
-        <CheckBox value={isWed} onValueChange={setWed} style={styles.checkbox}/>
-        <Text>Thu</Text>
-        <CheckBox value={isThu} onValueChange={setThu} style={styles.checkbox}/>
-        <Text>Fri</Text>
-        <CheckBox value={isFri} onValueChange={setFri} style={styles.checkbox}/>
-        <Text>Sat</Text>
-        <CheckBox value={isSat} onValueChange={setSat} style={styles.checkbox}/>
-        <Text>Sun</Text>
-        <CheckBox value={isSun} onValueChange={setSun} style={styles.checkbox}/>
-      </View>
-      <View>
-        <Text style={styles.headers}>Time</Text>
-      </View>
-<View>
-<View>
-        <Button onPress={showTimepicker} title="Timepicker" />
-      </View>
-      {show && (
-        <DateTimePicker
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          onChange={onChange}
-        />
-      )}</View>
-      <View>
-        <Text>Selected time is {cTime}</Text>
-      </View>
-      <Button title="Add time" onPress={pushTime}/>
-      <Text>{timesList}</Text>
-      <View>
-        <Button title="Add medication" onPress={pushMed}/>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+          <ProfileLine />
+          <View>
+            <Text style={styles.headers}>Medication</Text>
+            <SearchBar
+              placeholder="Type Here..."
+              onChangeText={setSearchText}
+              value={searchText}
+              platform="android"
+              showLoading={true}
+            />
+          </View>
+          <View>
+           <Text style={styles.headers}>Days</Text>
+          </View>
+          <View style={styles.rowContainer}>
+            <Text>Mon</Text>
+            <CheckBox value={isMon} onValueChange={setMon} style={styles.checkbox}/>
+            <Text>Tue</Text>
+            <CheckBox value={isTue} onValueChange={setTue} style={styles.checkbox}/>
+            <Text>Wed</Text>
+            <CheckBox value={isWed} onValueChange={setWed} style={styles.checkbox}/>
+            <Text>Thu</Text>
+            <CheckBox value={isThu} onValueChange={setThu} style={styles.checkbox}/>
+            <Text>Fri</Text>
+            <CheckBox value={isFri} onValueChange={setFri} style={styles.checkbox}/>
+            <Text>Sat</Text>
+            <CheckBox value={isSat} onValueChange={setSat} style={styles.checkbox}/>
+            <Text>Sun</Text>
+            <CheckBox value={isSun} onValueChange={setSun} style={styles.checkbox}/>
+          </View>
+          <View>
+            <Text style={styles.headers}>Time</Text>
+          </View>
+    <View>
+    <View>
+            <Button onPress={showTimepicker} title="Timepicker" />
+          </View>
+          {show && (
+            <DateTimePicker
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              onChange={onChange}
+            />
+          )}</View>
+          <View>
+            <Text>Selected time is {cTime}</Text>
+          </View>
+          <Button title="Add time" onPress={pushTime}/>
+          <Text>{timesList}</Text>
+          <View>
+            <Button title="Add medication" onPress={pushMed}/>
+          </View>
+          <StatusBar style="auto" />
+        </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from '@react-navigation/native';
+import { BoxShadow } from "react-native-shadow";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -16,6 +17,19 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const shadowOpt = {
+        width: 150,
+        height: 50,
+        color: "#000",
+        border: 2,
+        radius: 10,
+        opacity: 0.2,
+        x: 0,
+        y: 3,
+        style: { marginVertical: 5 }
+      };
+
+
 const navigation = useNavigation();
 
   return (
@@ -27,8 +41,6 @@ const navigation = useNavigation();
                 style={styles.TextInput}
                 placeholder="Name."
                 placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                onChangeText={(password) => setPassword(password)}
               />
        </View>
       <StatusBar style="auto" />
@@ -51,7 +63,7 @@ const navigation = useNavigation();
         />
       </View>
 
-
+        <BoxShadow setting={shadowOpt}>
       <TouchableHighlight
                   activeOpacity={0.6}
                   underlayColor="#edfbff"
@@ -64,6 +76,7 @@ const navigation = useNavigation();
                   }}>
                   <Text style={{fontWeight: "bold", width: 150, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 20}}>Register</Text>
       </TouchableHighlight>
+      </BoxShadow>
     </View>
   );
 }
@@ -81,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   inputView: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: "#88b7c6",
     borderRadius: 30,
     width: "70%",
     height: 45,

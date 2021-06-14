@@ -36,8 +36,8 @@ if (!fontsLoaded) {
       <Text style={styles.title}>MedSched</Text>
      </View>
      <View style={styles.dataContainer}>
-      <Text style={styles.username}>Username</Text>
-      <Text style={styles.email}>E-Mail Address</Text>
+      <Text style={styles.username}>Dominic</Text>
+      <Text style={styles.email}>dteam@gmail.com</Text>
      </View>
       <View style={styles.logout}>
       <BoxShadow setting={shadowOpt}>
