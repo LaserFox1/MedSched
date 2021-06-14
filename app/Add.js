@@ -13,7 +13,7 @@ function Add(props) {
   const [searchText, setSearchText] = useState();
   const [date, setDate] = useState(new Date(1598051730000));
   const [cTime, setTime] = useState("12:00");
-  const [cUser, setUser] = useState("Paul");
+  const [cUser, setCUser] = useState("");
    const [mode, setMode] = useState('date');
    const [show, setShow] = useState(false);
    const [med, setMed] = useState("Aspirin");
@@ -37,12 +37,22 @@ function Add(props) {
 
    var db = firebase.firestore();
 
+   firebase.auth().onAuthStateChanged((firebaseUser) => {
+           if (firebaseUser) {
+           console.log("Add.js screen:")
+           console.log(firebaseUser);
+           setCUser(firebaseUser.uid);
+           } else {
+             console.log("Failed");
+           }
+   });
+
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate || date;
       setShow(Platform.OS === 'ios');
       setDate(currentDate);
       var minutes;
-      if(currentDate.getMinutes().length > 1){
+      if(currentDate.getMinutes().length > 9){
         minutes = currentDate.getMinutes();
       }
       else{

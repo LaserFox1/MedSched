@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from 'react-native-elements';
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { BoxShadow } from "react-native-shadow";
-import * as Google from "expo-google-app-auth";
 import { useNavigation } from '@react-navigation/native';
 import { useFonts,
   Pattaya_400Regular

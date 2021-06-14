@@ -12,7 +12,7 @@ function ProfileLine() {
   // [END auth_state_listener]
   return (
     <View style={styles.userContainer}>
-      <Text style={styles.username}>{user.Mail}</Text>
+      <Text style={styles.username}></Text>
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#bfefff"
