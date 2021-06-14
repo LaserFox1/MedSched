@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform, LogBox } from 'react-native';
+import { Platform, LogBox } from 'react-native';
 import Menu from './app/Menu';
 import Welcome from './app/WelcomePage';
 import UserPage from './app/UserPage';
@@ -11,9 +11,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import firebase from "firebase";
-LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
+LogBox.ignoreAllLogs();
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -23,12 +23,15 @@ Notifications.setNotificationHandler({
   }),
 });
 
+var med = "";
+
 export default App = () => {
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(false);
     const notificationListener = useRef();
     const responseListener = useRef();
     const [currentTime, setCurrentTime] = useState();
+    const [cUser, setCUser] = useState("");
 
     if(!firebase.apps.length){
     firebase.initializeApp({
@@ -40,29 +43,35 @@ export default App = () => {
 
     var db = firebase.firestore();
 
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+      // console.log("Add.js screen:")
+      // console.log(firebaseUser);
+      setCUser(firebaseUser.uid);
+      } else {
+        console.log("Failed");
+      }
+});
+
     updateTime = () => {
         setCurrentTime(new Date().toLocaleTimeString());
-        db.collection("users").doc("Paul").collection("storedMedication").doc("Aspirin").get().then((doc) => {
-            if (doc.exists) {
-                console.log("Document data:", doc.data().days);
-                var dayArr = doc.data().days.split(',');
-                var timeArr = doc.data().times.split(',');
-                for (var d of dayArr){
-                    for(var t of timeArr){
-                        t += ":00"
-                        if(d == new Date().getDay() && t == currentTime){
-                            (async () => {
-                                await sendPushNotification(expoPushToken);
-                            })();
-                        }
-                    }
-                }
-            } else {
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
+        db.collection("users").doc(cUser).collection("storedMedication").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              var dayArr = doc.data().days.split(',');
+              var timeArr = doc.data().times.split(', ');
+              for (var d of dayArr){
+                  for(var t of timeArr){
+                      t += ":00"
+                      if(d == new Date().getDay() && t == currentTime){
+                          med = doc.id;
+                          (async () => {
+                              await sendPushNotification(expoPushToken);
+                          })();
+                      }
+                  }
+              }
+          });
+      });
     }
 
      useEffect(() => {
@@ -77,7 +86,7 @@ export default App = () => {
         });
 
         const interval = setInterval(() => {
-          //updateTime();
+          updateTime();
         }, 1000);
 
         return () => {
@@ -105,7 +114,7 @@ async function sendPushNotification(expoPushToken) {
     to: expoPushToken,
     sound: 'default',
     title: 'It is time to take your medication!',
-    body: 'Now scheduled: Aspirin',
+    body: `Now scheduled: ${med}`,
     data: { someData: 'goes here' },
   };
 
