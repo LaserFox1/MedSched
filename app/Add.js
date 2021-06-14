@@ -1,12 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Platform, CheckBox } from "react-native";
+import { StyleSheet, Text, View, Button, Platform, CheckBox, SafeAreaView } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { SearchBar } from "react-native-elements";
 import ProfileLine from "./ProfileLine2";
 import WeekdayPicker from "./WeekdayPicker";
 import TimeList from "./TimeList";
 import firebase from "firebase";
+import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
 
 
 function Add(props) {
@@ -88,6 +89,108 @@ function Add(props) {
     }
 
 
+    const medications = [
+      { name: 'Aspirin' },
+      { name: 'Amoxicillin' },
+      { name: 'Vitamin D' },
+      { name: 'Ibuprofen' },
+      { name: 'Cetirizine' },
+      { name: 'Azithromycin' },
+      { name: 'Amlodipine besylate' },
+      { name: 'Albuterol sulfate' },
+      { name: 'Cyclobenzaprine ' },
+      { name: 'Cephalexin' },
+      { name: 'Hydrochlorothiazide' },
+      { name: 'Lisinopril' },
+      { name: 'Amphetamine' },
+      { name: 'Loratadine' },
+      { name: 'Amoxicillin-clavulanate potassium' },
+      { name: "Folic acid" },
+      { name: 'Prednisone' },
+      { name: 'Benzonatate' },
+      { name: 'Gabapentin' },
+      { name: 'Zolpidem tartrate' },
+      { name: 'Trimethoprim' },
+      { name: 'Methylprednisolone' },
+      { name: 'Fluconazole' },
+      { name: "Atorvastatin" },
+      { name: 'Ferrous sulfate' },
+      { name: 'Cyanocobalamin' },
+      { name: 'Metronidazole' },
+      { name: 'Bromphen' },
+      { name: 'Pantoprazole sodium' },
+      { name: 'Vitamin D3' },
+      { name: 'Naproxen' },
+      { name: 'Alprazolam' },
+      { name: 'Oseltamivir phosphate' },
+      { name: 'Nitrofurantoin' },
+      { name: 'Losartan potassium' },
+      { name: 'Metoprolol succinate ER' },
+      { name: 'Fluticasone propionate' },
+      { name: 'Chlorhexidine gluconate' },
+      { name: 'Doxycycline' },
+      { name: 'Phenazopyridine HCl' },
+      { name: 'Metoprolol tartrate' },
+      { name: 'Latanoprost eye drops' },
+      { name: 'Sertraline HCl' },
+      { name: 'Trazodone hydrochloride' },
+      { name: 'Omeprazole' },
+      { name: 'Ciprofloxacin' },
+      { name: 'Levothyroxine sodium' },
+      { name: 'Meloxicam' },
+      { name: 'Docusate sodium' },
+      { name: 'Triamcinolone acetonide cream' },
+      { name: 'Novalgin' },
+      { name: 'RatioDolor' },
+      { name: 'Selina Gynial' },
+      { name: 'Selina Mite' },
+      { name: 'Neo-angin' },
+      { name: 'Strepsils' },
+      { name: 'NeoCitran' },
+      { name: 'Paracetamol' },
+      { name: 'Co-codamol' },
+      { name: 'Codeine' },
+      { name: 'Tramadol' },
+      { name: 'Morphine' },
+      { name: 'Diclofenac' },
+      { name: 'Dihydrocodeine' },
+      { name: 'Oxycodone' },
+      { name: 'Nefopam' },
+      { name: 'Fentanyl' },
+      { name: 'Ketamine' },
+      { name: 'Bisoprolol' },
+      { name: 'Atenolol' },
+      { name: 'Digoxin' },
+      { name: 'Amiodarone' },
+      { name: 'Adenosine' },
+      { name: 'Diltiazem' },
+      { name: 'Flucloxacillin' },
+      { name: 'Meropenem' },
+      { name: 'Vancomycin' },
+      { name: 'Gentamycin' },
+      { name: 'Clarithromycin' },
+      { name: 'Co-amoxiclav' },
+      { name: 'Ceftazidime' },
+      { name: 'Piperacillin' },
+      { name: 'Levofloxacin' },
+      { name: 'Cefuroxime' },
+      { name: 'Clindamycin' },
+      { name: 'Warfarin' },
+      { name: 'Rivaroxaban' },
+      { name: 'Apixaban' },
+      { name: 'Enoxaparin' },
+      { name: 'Funderparinex' },
+      { name: 'Heparin' },
+      { name: 'Sodium valproate' },
+      { name: "Phenytoin" },
+      { name: 'Levetiracetam' },
+      { name: 'Clonazepam' },
+      { name: 'Diazapam' },
+      { name: 'Lorazepam' },
+      { name: 'Carbamazepine' },
+      { name: 'Citalopram' },
+      { name: 'Fluoxetine' },
+    ];
 
 
   return (
@@ -95,13 +198,14 @@ function Add(props) {
       <ProfileLine />
       <View>
         <Text style={styles.headers}>Medication</Text>
-        <SearchBar
-          placeholder="Type Here..."
-          onChangeText={setSearchText}
-          value={searchText}
-          platform="android"
-          showLoading={true}
-        />
+      </View>
+      <View style={styles.autocompletesContainer}>
+            <Autocomplete
+              data={medications} 
+              valueExtractor={item => item.name}
+              handleSelectItem={(item) => item.name}
+              style={styles.input}
+            />
       </View>
       <View>
        <Text style={styles.headers}>Days</Text>
@@ -164,6 +268,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  autocompletesContainer: {
+    paddingTop: 0,
+    width: 1000,
+    paddingHorizontal: 8,
+  },
+  input: {maxHeight: 1000},
 });
 
 export default Add;
