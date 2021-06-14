@@ -88,109 +88,13 @@ function Add(props) {
         return output;
     }
 
-
-    const medications = [
-      { name: 'Aspirin' },
-      { name: 'Amoxicillin' },
-      { name: 'Vitamin D' },
-      { name: 'Ibuprofen' },
-      { name: 'Cetirizine' },
-      { name: 'Azithromycin' },
-      { name: 'Amlodipine besylate' },
-      { name: 'Albuterol sulfate' },
-      { name: 'Cyclobenzaprine ' },
-      { name: 'Cephalexin' },
-      { name: 'Hydrochlorothiazide' },
-      { name: 'Lisinopril' },
-      { name: 'Amphetamine' },
-      { name: 'Loratadine' },
-      { name: 'Amoxicillin-clavulanate potassium' },
-      { name: "Folic acid" },
-      { name: 'Prednisone' },
-      { name: 'Benzonatate' },
-      { name: 'Gabapentin' },
-      { name: 'Zolpidem tartrate' },
-      { name: 'Trimethoprim' },
-      { name: 'Methylprednisolone' },
-      { name: 'Fluconazole' },
-      { name: "Atorvastatin" },
-      { name: 'Ferrous sulfate' },
-      { name: 'Cyanocobalamin' },
-      { name: 'Metronidazole' },
-      { name: 'Bromphen' },
-      { name: 'Pantoprazole sodium' },
-      { name: 'Vitamin D3' },
-      { name: 'Naproxen' },
-      { name: 'Alprazolam' },
-      { name: 'Oseltamivir phosphate' },
-      { name: 'Nitrofurantoin' },
-      { name: 'Losartan potassium' },
-      { name: 'Metoprolol succinate ER' },
-      { name: 'Fluticasone propionate' },
-      { name: 'Chlorhexidine gluconate' },
-      { name: 'Doxycycline' },
-      { name: 'Phenazopyridine HCl' },
-      { name: 'Metoprolol tartrate' },
-      { name: 'Latanoprost eye drops' },
-      { name: 'Sertraline HCl' },
-      { name: 'Trazodone hydrochloride' },
-      { name: 'Omeprazole' },
-      { name: 'Ciprofloxacin' },
-      { name: 'Levothyroxine sodium' },
-      { name: 'Meloxicam' },
-      { name: 'Docusate sodium' },
-      { name: 'Triamcinolone acetonide cream' },
-      { name: 'Novalgin' },
-      { name: 'RatioDolor' },
-      { name: 'Selina Gynial' },
-      { name: 'Selina Mite' },
-      { name: 'Neo-angin' },
-      { name: 'Strepsils' },
-      { name: 'NeoCitran' },
-      { name: 'Paracetamol' },
-      { name: 'Co-codamol' },
-      { name: 'Codeine' },
-      { name: 'Tramadol' },
-      { name: 'Morphine' },
-      { name: 'Diclofenac' },
-      { name: 'Dihydrocodeine' },
-      { name: 'Oxycodone' },
-      { name: 'Nefopam' },
-      { name: 'Fentanyl' },
-      { name: 'Ketamine' },
-      { name: 'Bisoprolol' },
-      { name: 'Atenolol' },
-      { name: 'Digoxin' },
-      { name: 'Amiodarone' },
-      { name: 'Adenosine' },
-      { name: 'Diltiazem' },
-      { name: 'Flucloxacillin' },
-      { name: 'Meropenem' },
-      { name: 'Vancomycin' },
-      { name: 'Gentamycin' },
-      { name: 'Clarithromycin' },
-      { name: 'Co-amoxiclav' },
-      { name: 'Ceftazidime' },
-      { name: 'Piperacillin' },
-      { name: 'Levofloxacin' },
-      { name: 'Cefuroxime' },
-      { name: 'Clindamycin' },
-      { name: 'Warfarin' },
-      { name: 'Rivaroxaban' },
-      { name: 'Apixaban' },
-      { name: 'Enoxaparin' },
-      { name: 'Funderparinex' },
-      { name: 'Heparin' },
-      { name: 'Sodium valproate' },
-      { name: "Phenytoin" },
-      { name: 'Levetiracetam' },
-      { name: 'Clonazepam' },
-      { name: 'Diazapam' },
-      { name: 'Lorazepam' },
-      { name: 'Carbamazepine' },
-      { name: 'Citalopram' },
-      { name: 'Fluoxetine' },
-    ];
+    const pullMed = () => {
+      db.collection("medication").get().then((med) => {
+        med.forEach((doc) => {
+          console.log(doc.data().name);
+        });
+      });
+    };
 
 
   return (
@@ -201,7 +105,7 @@ function Add(props) {
       </View>
       <View style={styles.autocompletesContainer}>
             <Autocomplete
-              data={medications} 
+              data={pullMed} 
               valueExtractor={item => item.name}
               handleSelectItem={(item) => item.name}
               style={styles.input}
