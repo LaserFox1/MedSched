@@ -1,8 +1,8 @@
 {
-  "expoServerNgrokUrl": "https://fx-qvf.anonymous.medsched.exp.direct",
-  "packagerNgrokUrl": "https://packager.fx-qvf.anonymous.medsched.exp.direct",
-  "ngrokPid": 43724,
-  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://4d-ywt.anonymous.medsched.exp.direct",
+  "packagerNgrokUrl": "https://packager.4d-ywt.anonymous.medsched.exp.direct",
+  "ngrokPid": 24332,
+  "expoServerPort": null,
   "packagerPort": 19000,
   "packagerPid": null,
   "webpackServerPort": null,

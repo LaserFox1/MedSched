@@ -39,8 +39,6 @@ function Add(props) {
 
    firebase.auth().onAuthStateChanged((firebaseUser) => {
            if (firebaseUser) {
-           console.log("Add.js screen:")
-           console.log(firebaseUser);
            setCUser(firebaseUser.uid);
            } else {
              console.log("Failed");
@@ -86,7 +84,7 @@ function Add(props) {
 
     const pushTime = () => {
         var ifComma = "";
-        if(timesList != "") ifComma = ",";
+        if(timesList != "") ifComma = ", ";
         setTimes(timesList + ifComma + cTime);
         console.log(timesList);
     }

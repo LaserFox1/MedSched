@@ -18,6 +18,16 @@ function CalendarScreen(props) {
 
   var db = firebase.firestore();
 
+  const [cUser, setCUser] = useState("");
+
+      firebase.auth().onAuthStateChanged((firebaseUser) => {
+                 if (firebaseUser) {
+                 setCUser(firebaseUser.uid);
+                 } else {
+                   console.log("Failed");
+                 }
+         });
+
   return (
     <View style={styles.container}>
           <ProfileLine />
@@ -27,7 +37,7 @@ function CalendarScreen(props) {
                 console.log("selected day", day);
                 var s = "";
                 setState(s);
-                db.collection("users").doc("Dominic").collection("storedMedication").get().then((querySnapshot) => {
+                db.collection("users").doc(cUser).collection("storedMedication").get().then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         console.log(doc.id, " => ", doc.data().toString);
                         var dayArr = doc.data().days.split(',');

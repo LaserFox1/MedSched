@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import firebase from "firebase";
@@ -7,12 +7,19 @@ import { useNavigation } from '@react-navigation/native';
 function ProfileLine() {
     const navigation = useNavigation();
 
-    const user = firebase.auth().currentUser;
-    console.log(user);
-  // [END auth_state_listener]
+    const [cUser, setCUser] = useState("");
+
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+               if (firebaseUser) {
+               setCUser(firebaseUser.email);
+               } else {
+                 console.log("Failed");
+               }
+       });
+
   return (
     <View style={styles.userContainer}>
-      <Text style={styles.username}></Text>
+      <Text style={styles.username}>{cUser}</Text>
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#bfefff"
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
   username: {
     flex: 2,
     alignItems: "center",
-    fontSize: 35,
+    fontSize: 30,
   },
   iconUser: {
     flex: 0.5,
