@@ -1,9 +1,9 @@
 {
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "expoServerPort": null,
-  "packagerPort": null,
+  "expoServerNgrokUrl": "https://sb-j9c.anonymous.medsched.exp.direct",
+  "packagerNgrokUrl": "https://packager.sb-j9c.anonymous.medsched.exp.direct",
+  "ngrokPid": 18380,
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
   "packagerPid": null,
   "webpackServerPort": null,
   "devToolsPort": 19002

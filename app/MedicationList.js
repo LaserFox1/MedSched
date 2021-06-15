@@ -3,15 +3,39 @@ import React, { useState, Component } from "react";
 import { StyleSheet, Text, View,  FlatList, RefreshControl, Alert } from "react-native";
 import Swipeout from "react-native-swipeout";
 import ProfileLine from "./ProfileLine3";
+import firebase from "firebase";
 
-var data = [
-  {
-    id: 1,
-    name: 'Aspirin',
-    date: 'Mo, Mi, Fr',
-    time: '08:00, 18:00',
-  }
-]
+if(!firebase.apps.length){
+   firebase.initializeApp({
+     apiKey: "AIzaSyBPBiT_zEwB85zG1xODwDPjW0ZXp9DUMQs",
+     authDomain: "medsched-29619.firebaseapp.com",
+     projectId: "medsched-29619"
+   });
+   }else firebase.app();
+
+   var db = firebase.firestore();
+
+   firebase.auth().onAuthStateChanged((firebaseUser) => {
+       if (firebaseUser) {
+       cUser = firebaseUser.uid;
+       } else {
+         console.log("Failed");
+       }
+   });
+
+var cUser = "";
+var data = [];
+
+if(cUser != ""){
+db.collection("users").doc(cUser).collection("storedMedication")
+    .onSnapshot((querySnapshot) => {
+    var arr1 = [];
+        querySnapshot.forEach((doc) => {
+            arr1.push(doc.data());
+        });
+        console.log(arr1);
+    });
+    }
 
 class FlatListItem extends Component {
   constructor(props) {
