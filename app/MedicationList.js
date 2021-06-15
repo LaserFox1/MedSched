@@ -15,27 +15,40 @@ if(!firebase.apps.length){
 
    var db = firebase.firestore();
 
+    var cUser = "";
+    var data = [];
+    var medId = 0;
+
    firebase.auth().onAuthStateChanged((firebaseUser) => {
        if (firebaseUser) {
        cUser = firebaseUser.uid;
+       console.log(firebaseUser.uid);
+       if(cUser != ""){
+            console.log("Gaming");
+           db.collection("users").doc(cUser).collection("storedMedication").get().then((querySnapshot) => {
+                    var arr1 = [];
+                     querySnapshot.forEach((doc) => {
+                        console.log("True gaming");
+                         medId +=1;
+                         var newData =
+                         {
+                             id: medId,
+                             name: doc.id,
+                             date: doc.data().days,
+                             time: doc.data().times
+                         };
+                         console.log(newData);
+                         arr1.push(newData);
+                     });
+                     data = arr1;
+                 });
+           }
        } else {
          console.log("Failed");
        }
    });
 
-var cUser = "";
-var data = [];
 
-if(cUser != ""){
-db.collection("users").doc(cUser).collection("storedMedication")
-    .onSnapshot((querySnapshot) => {
-    var arr1 = [];
-        querySnapshot.forEach((doc) => {
-            arr1.push(doc.data());
-        });
-        console.log(arr1);
-    });
-    }
 
 class FlatListItem extends Component {
   constructor(props) {
