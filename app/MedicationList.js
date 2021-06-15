@@ -47,7 +47,12 @@ if(!firebase.apps.length){
          console.log("Failed");
        }
    });
-
+function deleteMed(row){
+    if(cUser!=""){
+        var displayName = data[row].name;
+        db.collection("users").doc(cUser).collection("storedMedication").doc(displayName).delete();
+    }
+}
 
 
 class FlatListItem extends Component {
@@ -78,6 +83,7 @@ class FlatListItem extends Component {
               [
                 {text: 'No'},
                 {text: 'Yes', onPress: () => {
+                    deleteMed(this.props.index);
                     data.splice(this.props.index, 1);
                     this.props.parentFlatList.refreshFlatList(deletingRow);
                 }},

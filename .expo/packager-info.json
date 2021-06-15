@@ -1,9 +1,10 @@
 {
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "expoServerPort": null,
-  "packagerPort": null,
+  "expoServerNgrokUrl": "https://vj-5v2.anonymous.medsched.exp.direct",
+  "packagerNgrokUrl": "https://packager.vj-5v2.anonymous.medsched.exp.direct",
+  "ngrokPid": 58304,
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
   "packagerPid": null,
-  "webpackServerPort": null
+  "webpackServerPort": null,
+  "devToolsPort": 19002
 }

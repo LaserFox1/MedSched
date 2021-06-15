@@ -14,7 +14,8 @@ import firebase from "firebase";
 
 const Stack = createStackNavigator();
 LogBox.ignoreAllLogs();
-
+LogBox.ignoreAllLogs();
+LogBox.ignoreAllLogs();
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -28,6 +29,7 @@ var med = "";
 export default App = () => {
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(false);
+    const [gaming, setGaming] = useState();
     const notificationListener = useRef();
     const responseListener = useRef();
     const [currentTime, setCurrentTime] = useState();
@@ -53,6 +55,31 @@ export default App = () => {
       }
 });
 
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+      // console.log("Add.js screen:")
+      // console.log(firebaseUser);
+      setCUser(firebaseUser.uid);
+      } else {
+        console.log("Failed");
+      }
+});
+
+    function authStateListener() {
+          // [START auth_state_listener]
+          firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              setGaming(user);
+              // ...
+            } else {
+              // User is signed out
+              // ...
+            }
+          });
+          // [END auth_state_listener]
+        }
     updateTime = () => {
         setCurrentTime(new Date().toLocaleTimeString());
         db.collection("users").doc(cUser).collection("storedMedication").get().then((querySnapshot) => {
@@ -95,8 +122,8 @@ export default App = () => {
           clearInterval(interval);
         }
       }, []);
-
-    return (
+    if(gaming!=null){
+        return (
         <NavigationContainer>
              <Stack.Navigator initialRouteName="Welcome">
                 <Stack.Screen name="Menu" component={Menu} options={{headerShown: false}}/>
@@ -106,8 +133,22 @@ export default App = () => {
                 <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
+            );
+        }
+    else{
+        return(
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Welcome">
+                <Stack.Screen name="Menu" component={Menu} options={{headerShown: false}}/>
+                <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
+                <Stack.Screen name="UserPage" component={UserPage} options={{headerShown: false}}/>
+                <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+                <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+
       );
-};
+}
 
 async function sendPushNotification(expoPushToken) {
   const message = {
@@ -159,5 +200,6 @@ async function registerForPushNotificationsAsync() {
   }
 
   return token;
+}
 }
 
