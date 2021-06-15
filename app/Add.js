@@ -53,7 +53,7 @@ function Add(props) {
       setShow(Platform.OS === 'ios');
       setDate(currentDate);
       var minutes;
-      if(currentDate.getMinutes().length > 9){
+      if(currentDate.getMinutes() > 9){
         minutes = currentDate.getMinutes();
       }
       else{
