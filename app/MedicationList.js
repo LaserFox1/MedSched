@@ -18,8 +18,8 @@ if(!firebase.apps.length){
     var cUser = "";
     var data = [];
     var medId = 0;
-
-   firebase.auth().onAuthStateChanged((firebaseUser) => {
+   function authChanged() {
+        firebase.auth().onAuthStateChanged((firebaseUser) => {
        if (firebaseUser) {
        cUser = firebaseUser.uid;
        console.log(firebaseUser.uid);
@@ -47,6 +47,8 @@ if(!firebase.apps.length){
          console.log("Failed");
        }
    });
+   }
+authChanged();
 function deleteMed(row){
     if(cUser!=""){
         var displayName = data[row].name;
@@ -115,6 +117,7 @@ class MedicationList extends Component {
     super(props);
     this.state = ({
       activeRowKey: null,
+      refreshing: false,
     });
   }
   refreshFlatList = (deletedKey) => {
@@ -125,11 +128,25 @@ class MedicationList extends Component {
     });
   }
   render() {
+    const wait = (timeout) => {
+      return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+    const onRefresh = () => {
+      authChanged();
+      this.setState({refreshing: true});
+      wait(2000).then(() => this.setState({refreshing: false}));
+    }
     return (
       <View style={styles.container}>
         <ProfileLine />
         <FlatList 
           data={data}
+          refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={onRefresh}
+          />
+          }
           renderItem={({item, index}) => {
             return (
               <FlatListItem item={item} index={index} parentFlatList={this}>
@@ -144,6 +161,57 @@ class MedicationList extends Component {
     )
   }
 };
+
+// const wait = (timeout) => {
+//   return new Promise(resolve => setTimeout(resolve, timeout));
+// }
+
+// function MedicationList() {
+//   const [refreshing, setRefreshing] = React.useState(false);
+
+//   const onRefresh = React.useCallback(() => {
+//     setRefreshing(true);
+//     wait(2000).then(() => setRefreshing(false));
+//   }, []);
+
+//   // constructor(props) {
+//   //   super(props);
+//   //   this.state = ({
+//   //     activeRowKey: null,
+//   //   });
+//   // }
+//   const refreshFlatList = (deletedKey) => {
+//     this.setState((prevState) => {
+//       return {
+//         deletedKey: deletedKey
+//       };
+//     });
+//   }
+
+//     return (
+//       <View style={styles.container}>
+//         <ProfileLine />
+//         <FlatList 
+//           data={data}
+//           refreshControl={
+//             <RefreshControl
+//               refreshing={refreshing}
+//               onRefresh={onRefresh}
+//             />
+//           }
+//           renderItem={({item, index}) => {
+//             return (
+//               <FlatListItem item={item} index={index} parentFlatList={this}>
+
+//               </FlatListItem>
+//             );
+//           }}
+//         >
+//         </FlatList>
+//         <StatusBar style="auto" />
+//       </View>
+//     )
+// };
 
 const styles = StyleSheet.create({
   container: {
