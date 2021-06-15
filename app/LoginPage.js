@@ -62,6 +62,7 @@ export default function App() {
             // ...
           })
           .catch((error) => {
+            alert("Warning! Invalid Credentials! Please try again.");
             var errorCode = error.code;
             var errorMessage = error.message;
           });
